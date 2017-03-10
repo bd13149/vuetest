@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-指令</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <style>
+        body{
+            font-family: "Microsoft Yahei";
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+<!--v-text-->
+<span v-text="msg"></span>
+<span id="span1"> {{ msg }} </span>
+<script>
+    var span1 = new Vue({
+        el: '#span1',
+        data: {
+            msg:'hello'
+        }
+    })
+</script>
+
+<!--v-show-->
+<div id="mess">
+    <p v-if="local">显示</p>
+    <p v-else="local">隐藏</p>
+    <p v-show="local">v-show指令</p>
+</div>
+<script>
+    var local = new Vue({
+        el:'#mess',
+        data:{
+            local:true
+        }
+    })
+    //if 和 show 为true时 显示；else为true时 隐藏
+</script>
+
+<div v-if="Math.random() > 0.5">
+    now you see me
+</div>
+<div v-else>
+    now you don`t
+</div>
+<!-- v-sele-if  -->
+<div v-if="type === 'A'">
+    A
+</div>
+<div v-else-if="type === 'B'">
+    B
+</div>
+<div v-else-if="type === 'C'">
+    C
+</div>
+<div v-else>
+    Not A/B/C
+</div>
+
+<!-- v-for -->
+
+
+<h1 v-if="ok">Yes</h1>
+<h1 v-else>No</h1>
+
+<template v-if="ok">
+
+    <h1>Title</h1>
+    <p>p1</p>
+    <p>p2</p>
+
+</template>
+<!--列表渲染-->
+<ul id="example-1">
+    <li v-for="item1 in items">
+        {{ item1.message }}
+    </li>
+</ul>
+1
+<script>
+    var example1 = new Vue({
+        el:'#example-1',
+        data:{
+            items:[
+                {message:'Foo'},
+                {message:'Bar'}
+            ]
+        }
+    });
+
+    example1.items = example1.items.filter(function (item) {
+        return item.message.match(/Foo/)
+    });
+
+</script>
+
+<ul id="example-2">
+    <li v-for="(item2, index) in items">
+        {{ parentMessage }} - {{ index }} - {{ item2.message }}
+    </li>
+</ul>
+<script>
+    var example2 = new Vue({
+        el: '#example-2',
+        data: {
+            parentMessage: 'Parent',
+            items: [
+                { message: 'Foo' },
+                { message: 'Bar' }
+            ]
+        }
+    })
+</script>
+
+<ul>
+    <template v-for="item in items">
+        <li>{{ item.msg }}</li>
+        <li class="divider"></li>
+    </template>
+</ul>
+<!--对象 v-for 通过一个对象的属性来迭代-->
+<ul id="repeat-object" class="demo">
+    <li v-for="value in object">
+        {{ value }}
+    </li>
+</ul>
+
+<script>
+    new Vue({
+        el:'#repeat-object',
+        data:{
+            object:{
+                firstName:'John',
+                lastName:'Doe',
+                age:30
+            }
+        }
+    })
+</script>
+
+<!--可以提供第二个的参数为键名：-->
+<div v-for="(value,key) in object">
+    {{ key }} : {{ value }}
+</div>
+
+<!--第三个参数为索引：-->
+<div v-for="(value, key, index) in object">
+    {{ index }}.{{ key }},{{ value }}
+</div>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

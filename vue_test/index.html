@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8">
+  <title>vue_test</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <style>
+    html, body, #editor {
+      margin: 0;
+      height: 100%;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      color: #333;
+    }
+
+    textarea, #editor div {
+      display: inline-block;
+      width: 49%;
+      height: 100%;
+      vertical-align: top;
+      box-sizing: border-box;
+      padding: 0 20px;
+    }
+
+    textarea {
+      border: none;
+      border-right: 1px solid #ccc;
+      resize: none;
+      outline: none;
+      background-color: #f6f6f6;
+      font-size: 14px;
+      font-family: 'Monaco', courier, monospace;
+      padding: 20px;
+    }
+
+    code {
+      color: #f66;
+    }
+  </style>
+</head>
+<body>
+<!--声明式渲染-->
+<div id="app">
+  {{ message }}
+</div>
+<script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello Vue!'
+
+    }
+  });
+</script>
+
+<div id="app-2">
+    <span v-bind:title="message">
+      Hover your mouse over me for a few seconds to see my dynamically bound title!
+    </span>
+</div>
+<script>
+  var app2 = new Vue({
+    el: '#app-2',
+    data: {
+      message: 'You loaded this page on ' + new Date()
+    }
+  });
+</script>
+
+<!--条件与循环-->
+<div id="app-3">
+    <p v-if="seen">Now you see me</p>
+</div>
+<script>
+  var app3 = new Vue({
+    el: '#app-3',
+    data: {
+      seen: true
+      //seen:false
+    }
+  });
+</script>
+
+<div id="app-4">
+    <ol>
+        <li v-for="todo in todos">
+          {{ todo.text }}
+        </li>
+    </ol>
+</div>
+<script>
+  var app4 = new Vue({
+    el: '#app-4',
+    data: {
+      todos: [
+        { text: 'learn javascript' },
+        { text: 'learn vue' },
+        { text: 'build something awesome' }
+      ]
+    }
+  });
+  //  在控制台里，输入 app4.todos.push({ text: 'New item' })。你会发现列表中多了一栏新内容。
+</script>
+<!--todos是数组的属性，todo是属性。todo in todos。-->
+
+<!--处理用户输入-->
+<!--
+ 为了让用户和你的应用进行互动，我们可以用v-on指令绑定一个监听事件用于调用
+-->
+<div id="app-5">
+  <p>{{ message }}</p>
+  <button v-on:click="reverseMessage">Reverse Message</button>
+</div>
+<script>
+  var app5 = new Vue({
+    el: '#app-5',
+    data: {
+      message: 'Hello Vue.js!'
+    },
+    methods: {
+      reverseMessage: function () {
+        this.message = this.message.split('').reverse().join('')
+      }
+    }
+  });
+</script>
+
+<div id="app-6">
+  <p>{{ message }}</p>
+  <input v-model="message">
+</div>
+<!------------------------------------>
+<script>
+
+  var app6 = new Vue({
+    el: '#app-6',
+    data: {
+      message: 'Hello Vue!'
+    }
+  })
+
+
+</script>
+<!-- built files will be auto injected -->
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
